@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center text-danger mb-4">Расписание</h2>
+
+{% if lessons %}
+<div class="calendar-grid">
+  {% for l in lessons %}
+  <div class="calendar-card">
+    <h4>{{ l.group.direction.name }}</h4>
+    <p class="group-name">{{ l.group.name }}</p>
+    <p class="time">{{ l.start_dt.strftime("%d.%m.%Y %H:%M") }}</p>
+    <p class="teacher">Преподаватель: {{ l.group.teacher.user.name }}</p>
+    <a href="{{ url_for('lesson_detail', lid=l.id) }}" class="btn btn-outline-light btn-sm">Подробнее</a>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+  <p class="text-center text-light">Пока нет уроков</p>
+{% endif %}
+
+{% endblock %}

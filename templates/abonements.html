@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #000; /* черный фон */
+  }
+
+  h2 {
+    color: #ff2d55; /* красный заголовок */
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .abonement-card {
+    border: 2px solid #fff; /* белая рамка */
+    color: #fff; /* белый текст */
+    background-color: transparent; /* прозрачный фон карточки */
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+
+  .abonement-card:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* легкое затемнение при наведении */
+    transform: translateY(-5px);
+  }
+
+  .abonement-card .card-body {
+    padding: 30px;
+  }
+
+  .abonement-card .card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  .abonement-card .card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .abonement-card .text-primary {
+    color: #ff2d55 !important; /* красная цена */
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .btn-outline-warning {
+    border-color: #ff2d55;
+    color: #ff2d55;
+  }
+
+  .btn-outline-warning:hover {
+    background-color: #ff2d55;
+    color: #fff;
+  }
+
+  .btn-primary {
+    background-color: #ff2d55;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #e60039;
+  }
+</style>
+
+<h2 class="text-center mb-5">Абонементы</h2>
+
+<div class="row justify-content-center">
+  {% for a in abonements %}
+  <div class="col-md-4 col-sm-6 mb-4">
+    <div class="card abonement-card shadow-sm text-center">
+      <div class="card-body d-flex flex-column justify-content-between">
+        <div>
+          <h4 class="card-title">{{ a.name }}</h4>
+          <p class="card-text">{{ a.description }}</p>
+        </div>
+        <div>
+          <h5 class="text-primary">{{ a.price }} ₽</h5>
+          {% if user and user.role == 'admin' %}
+          <a href="{{ url_for('admin_edit_abonement', aid=a.id) }}" class="btn btn-outline-warning mt-3">Редактировать</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if user and user.role == 'admin' %}
+<div class="text-center mt-4">
+  <a class="btn btn-primary" href="{{ url_for('admin_add_abonement') }}">Добавить абонемент</a>
+</div>
+{% endif %}
+
+{% endblock %}

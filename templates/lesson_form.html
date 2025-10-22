@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Добавить урок</h3>
+<form method="post" class="w-50">
+  <div class="mb-3">
+    <label class="form-label">Группа</label>
+      <label>
+          <select name="group_id" class="form-control">
+            {% for g in groups %}
+              <option value="{{ g.id }}">{{ g.name }} ({{ g.direction.name }})</option>
+            {% endfor %}
+          </select>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Дата и время</label>
+    <!-- datetime-local даёт строку вида YYYY-MM-LIDTH:MM -->
+      <label>
+          <input class="form-control" type="datetime-local" name="start_dt" required>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Длительность (мин)</label>
+      <label>
+          <input class="form-control" name="duration" value="60">
+      </label>
+  </div>
+  <button class="btn btn-primary" type="submit">Создать урок</button>
+</form>
+{% endblock %}

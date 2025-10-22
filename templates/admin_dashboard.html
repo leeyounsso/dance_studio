@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Админ-панель</h2>
+<ul>
+  <li>Студентов: {{stats.students}}</li>
+  <li>Преподавателей: {{stats.teachers}}</li>
+  <li>Направлений: {{stats.directions}}</li>
+  <li>Ближайших уроков: {{ stats.upcoming_lessons }}</li>
+</ul>
+
+<h4>Действия</h4>
+<ul>
+  <li><a href="{{ url_for('admin_add_direction') }}">Добавить направление</a></li>
+  <li><a href="{{ url_for('admin_add_group') }}">Добавить группу</a></li>
+  <li><a href="{{ url_for('admin_add_lesson') }}">Добавить урок</a></li>
+  <li><a href="{{ url_for('admin_add_student') }}">Добавить студента</a></li>
+  <li><a href="{{ url_for('lessons')}}">Просмотреть расписание</a></li>
+   <li><a href="{{ url_for('admin_students') }}" >Студенты</a></li>
+</ul>
+{% endblock %}

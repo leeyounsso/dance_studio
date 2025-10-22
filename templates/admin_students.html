@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center text-danger mb-4">Студенты</h2>
+
+<div class="table-responsive">
+  <table class="table table-dark table-bordered align-middle text-center">
+    <thead>
+      <tr>
+        <th>Имя</th>
+        <th>Email</th>
+        <th>Группа</th>
+        <th>Уроки</th>
+        <th>Посещаемость</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.user.name }}</td>
+        <td>{{ s.user.email }}</td>
+        <td>{{ s.group.name if s.group else "—" }}</td>
+        <td>
+          {% for b in s.bookings %}
+            <div>
+              {{ b.lesson.group.direction.name }} — {{ b.lesson.start_dt.strftime("%d.%m %H:%M") }}
+            </div>
+          {% else %}
+            <span class="text-muted">Нет записей</span>
+          {% endfor %}
+        </td>
+        <td>
+          {% for b in s.bookings %}
+            <form method="post" action="{{ url_for('admin_mark_attendance', booking_id=b.id) }}" style="display:inline;">
+              <button type="submit"
+                      class="btn btn-sm {% if b.attended %}btn-success{% else %}btn-outline-light{% endif %}">
+                {{ "✓" if b.attended else "—" }}
+              </button>
+            </form>
+          {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Добавить группу</h3>
+<form method="post" class="w-50">
+  <div class="mb-3">
+    <label class="form-label">Название группы</label>
+      <label>
+          <input class="form-control" name="name" required>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Направление</label>
+      <label>
+          <select class="form-control" name="direction_id">
+            {% for d in directions %}
+              <option value="{{ d.id }}">{{ d.name }}</option>
+            {% endfor %}
+          </select>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Преподаватель</label>
+      <label>
+          <select class="form-control" name="teacher_id">
+            {% for t in teachers %}
+              <option value="{{ t.id }}">{{ t.user.name }}</option>
+            {% endfor %}
+          </select>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Вместимость</label>
+      <label>
+          <input type="number" class="form-control" name="capacity" value="12" min="1" required>
+      </label>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Место</label>
+      <label>
+          <input class="form-control" name="location">
+      </label>
+  </div>
+  <button class="btn btn-primary" type="submit">Создать</button>
+</form>
+{% endblock %}

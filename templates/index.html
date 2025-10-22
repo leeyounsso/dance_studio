@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-left">
+      <h1 class="hero-title">Стань частью<br><span class="hero-accent">танцевального мира</span></h1>
+      <p class="hero-sub">Лучшие преподаватели, уютная студия и удобные абонементы для любого уровня.</p>
+      <a href="{{ url_for('abonements') }}" class="btn hero-btn">Абонементы</a>
+    </div>
+
+    <div class="hero-right" role="img" aria-label="Данс">
+      <!-- Фон через CSS -->
+    </div>
+  </div>
+</section>
+{% endblock %}

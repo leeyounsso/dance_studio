@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ teacher.user.name }}</h2>
+<p>{{ teacher.bio }}</p>
+
+
+{% if lessons is defined %}
+  <h4>Уроки</h4>
+  <ul>
+    {% for l in lessons %}
+      <li>{{ l.start_dt.strftime("%Y-%m-%d %H:%M") }} — <a href="{{ url_for('lesson_detail', lid=l.id) }}">Подробнее</a></li>
+    {% else %}
+      <li>Уроков нет</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}

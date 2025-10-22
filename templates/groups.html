@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Группы</h2>
+<table class="table">
+  <thead><tr><th>Группа</th><th>Направление</th><th>Преподаватель</th><th>Вместимость</th><th>Место</th></tr></thead>
+  <tbody>
+    {% for g in groups %}
+      <tr>
+        <td>{{ g.name }}</td>
+        <td>{{ g.direction.name }}</td>
+        <td>{{ g.teacher.user.name }}</td>
+        <td>{{ g.capacity }}</td>
+        <td>{{ g.location }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

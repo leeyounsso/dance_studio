@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Абонементы</h2>
+<ul class="list-group">
+  {% for s in Subscription.query.all() %}
+    <li class="list-group-item">
+      <strong>{{ s.title }}</strong> — {{ s.description }} — {{ s.sessions }} занятий — {{ s.price }} €
+    </li>
+  {% else %}
+    <li class="list-group-item">Абонементы не заданы</li>
+  {% endfor %}
+</ul>
+{% endblock %}

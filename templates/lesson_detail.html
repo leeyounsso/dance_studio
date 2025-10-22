@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>{{ lesson.group.direction.name }} — {{ lesson.group.name }}</h3>
+<p>Преподаватель: {{ lesson.group.teacher.user.name }}</p>
+<p>Когда: {{ lesson.start_dt.strftime("%Y-%m-%d %H:%M") }} ({{ lesson.duration_minutes }} мин)</p>
+<p>Место: {{ lesson.group.location }}</p>
+<p>Вместимость: {{ lesson.group.capacity }}, занято: {{ taken }}, свободно: {{ spots_left }}</p>
+
+{% if user and user.role == 'student' %}
+  <form method="post" action="{{ url_for('book_lesson', lid=lesson.id) }}">
+    <button class="btn btn-primary" {% if spots_left <= 0 %}disabled{% endif %}>
+      {% if spots_left <= 0 %}Мест нет{% else %}Записаться{% endif %}
+    </button>
+  </form>
+{% else %}
+  <p>Только зарегистрированные студенты могут записываться.</p>
+{% endif %}
+
+<h4 class="mt-4">Записанные студенты</h4>
+<ul>
+  {% for b in lesson.bookings %}
+    <li>{{ b.student.user.name }} {% if b.attended %}(посетил){% endif %}</li>
+  {% else %}
+    <li>Никто пока не записан</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

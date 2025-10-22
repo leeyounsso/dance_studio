@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Добавить студента</h2>
+<form method="post">
+    <label>Имя:</label>
+    <input type="text" name="name" required><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" required><br>
+
+    <label>Пароль:</label>
+    <input type="password" name="password" required><br>
+
+    <label>Группа:</label>
+    <select name="group_id" required>
+        {% for g in groups %}
+            <option value="{{ g.id }}">{{ g.name }}</option>
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Добавить</button>
+</form>
+{% endblock %}
